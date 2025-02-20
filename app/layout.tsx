@@ -4,7 +4,6 @@ import "./globals.css";
 import {
   ClerkProvider,
   SignedIn,
-  UserButton,
 } from "@clerk/nextjs";
 
 const notoSansDisplay = Noto_Sans_Display({
@@ -17,6 +16,7 @@ export const metadata: Metadata = {
   description: "Creado por Severitech",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,10 +25,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+
         <body className={`${notoSansDisplay.variable} `}>
           
           <SignedIn>
-            <UserButton />
           </SignedIn>
           {children}
         </body>

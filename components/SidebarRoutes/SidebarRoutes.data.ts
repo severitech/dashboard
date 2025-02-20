@@ -1,56 +1,53 @@
-import{
-    BarChart4,
-    Building2,
-    PanelsTopLeft,
-    Settings,
-    ShieldCheck,
-    CircleHelpIcon,
-    Calendar
-} from 'lucide-react' 
+import {
+  BarChart4,
+  Building2,
+  PanelsTopLeft,
+  Settings,
+  ShieldCheck,
+  CircleHelpIcon,
+  Calendar,
+} from "lucide-react";
 
 export const sideBarRoutesdata = [
-    {
-        nombre:"Panel de control",
-        icon: PanelsTopLeft,
-        href: "/"
+  {
+    nombre: "Panel de control",
+    icon: PanelsTopLeft,
+    href: "/",
+  },
+  {
+    nombre: "Empresas",
+    icon: Building2,
+    href: "/Empresas",
+  },
+  {
+    nombre: "Calenadario",
+    icon: Calendar,
+    href: "/Calenadario",
+  },
+];
 
-    },{
-        nombre: "Empresas",
-        icon: Building2,
-        href: "/"
+export const dataToolsSidebar = [
+  {
+    nombre: "Ayuda",
+    icon: CircleHelpIcon,
+    href: "/Ayuda",
+  },
+  {
+    nombre: "Datos",
+    icon: BarChart4,
+    href: "/Datos",
+  },
+];
 
-    },{
-        nombre: "Calenadario",
-        icon: Calendar,
-        href: "/"
-
-    }
-]
-
-export const dataToolsSidebar= [
-    {
-        nombre: "Ayuda",
-        icon: CircleHelpIcon,
-        href: "/"
-
-    },{
-        nombre: "Datos",
-        icon: BarChart4,
-        href: "/"
-
-    }
-]
-
-export const dataSupportSideBar= [
-    {
-        nombre: "Configuracion",
-        icon: Settings,
-        href: "/"
-
-    },{
-        nombre: "Seguridad",
-        icon: ShieldCheck,
-        href: "/"
-
-    }
-]
+export const dataSupportSideBar = [
+  {
+    nombre: "Configuracion",
+    icon: Settings,
+    href: "/Configuracion",
+  },
+  {
+    nombre: "Seguridad",
+    icon: ShieldCheck,
+    href: "/Seguridad",
+  },
+];

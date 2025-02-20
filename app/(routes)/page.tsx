@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { CardSumary } from "./components/CardSumary";
 import React from "react";
-
+import { LastCostumers } from "@/components/LastCostumers";
 const cardSumary = [
   {
     icon: UserRound,
@@ -54,6 +54,10 @@ function page() {
           />
         ))}
       </div>
+
+      <section className="grid grid-cols-1 mt-12 xl:grid-cols-2 md:gap-x-10 ">
+        <LastCostumers/>
+      </section>
     </div>
   );
 }

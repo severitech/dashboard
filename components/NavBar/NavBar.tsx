@@ -7,7 +7,7 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { SidebarRoutes } from "../SidebarRoutes/SidebarRoutes";
 import { useEffect, useState } from "react";
-
+import { ToggleTheme } from "@/components/ToggleTheme";
 export function NavBar() {
   const [isClient, setIsClient] = useState(false);
 
@@ -21,11 +21,11 @@ export function NavBar() {
   }
 
   return (
-    <div className="flex items-center w-full h-20 border-b bg-background px-2 gap-x-4 justify-between md:px-6">
-      <section className="block md:hidden">
+    <nav className="flex items-center w-full h-20 border-b bg-background px-2 gap-x-4 justify-between md:px-6">
+      <section className="block xl:hidden">
         <Sheet>
           <SheetTrigger className="flex items-center">
-            <Menu />
+            <Menu  />
           </SheetTrigger>
           <SheetContent>
             <VisuallyHidden>
@@ -40,9 +40,9 @@ export function NavBar() {
         <Search strokeWidth={1} className="absolute top-2 right-2 text-gray-500"/>
       </section>
       <section className="flex gap-x-2 items-center text-white">
-        <p>togle</p>
+        <ToggleTheme />
         <UserButton />
       </section>
-    </div>
+    </nav>
   );
 }

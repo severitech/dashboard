@@ -26,7 +26,7 @@ export function SidebarRoutes() {
              <a
               href="https://severitech.dev"
               target="_blank"
-              className="text-orange-500 hover:text-orange-300 font-bold"
+              className="text-[#16c8c7] hover:text-[rgb(126,255,255)] font-bold"
             >Severitech
             </a>
           </p>

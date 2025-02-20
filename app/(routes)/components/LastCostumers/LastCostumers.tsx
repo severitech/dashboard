@@ -1,12 +1,16 @@
 import { Building } from "lucide-react";
-import { CustomIcon } from "../Customicon";
+import { CustomIcon } from "../../../../components/Customicon";
+import { CustomersTable } from "../CustomersTable";
 
 export function LastCostumers() {
   return (
-    <div className="p-5 rounded-lg shadow-sm bg-background">
+    <div className=" shadow-2xl rounded-xl p-5 mb-2 rounded-lg  bg-background">
       <section className="flex items-center gap-x-2">
         <CustomIcon icon= {Building}/>
         <p className="text-xl">Siguiente customizable</p>
+      </section>
+      <section >
+        <CustomersTable/>
       </section>
     </div>
   );

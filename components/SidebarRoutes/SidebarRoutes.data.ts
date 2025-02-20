@@ -17,7 +17,7 @@ export const sideBarRoutesdata = [
   {
     nombre: "Empresas",
     icon: Building2,
-    href: "/Empresas",
+    href: "/empresas",
   },
   {
     nombre: "Calenadario",

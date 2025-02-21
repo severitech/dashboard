@@ -8,7 +8,6 @@ import { CardSumary } from "./components/CardSumary";
 import React from "react";
 import { LastCostumers } from "@/app/(routes)/components/LastCostumers";
 import { SalesDistributors } from "@/app/(routes)/components/SalesDistributors";
-
 const cardSumary = [
   {
     icon: UserRound,

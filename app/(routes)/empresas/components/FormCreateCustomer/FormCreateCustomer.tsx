@@ -22,6 +22,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { UploadButton } from "@/utils/uploadthing";
+import { useToast } from "@/components/hooks/use-toast"
 const formSchema = z.object({
   nombre: z.string().min(4).max(50),
   ciudad: z.string().min(4).max(50),
@@ -47,7 +49,7 @@ export function FormCreateCustomer(props: FormCreateCustomerType) {
       profileImage: "",
     },
   });
-
+  const { toast } = useToast()
   const { isValid } = form.formState;
 
   // 2. Define a submit handler.
@@ -104,7 +106,11 @@ export function FormCreateCustomer(props: FormCreateCustomerType) {
               <FormItem>
                 <FormLabel>Sitio Web</FormLabel>
                 <FormControl>
-                  <Input placeholder="www.severitech.com " type="text" {...field} />
+                  <Input
+                    placeholder="www.severitech.com "
+                    type="text"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -115,26 +121,63 @@ export function FormCreateCustomer(props: FormCreateCustomerType) {
             name="telefono"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nombre de la empresa</FormLabel>
+                <FormLabel>Teléfono</FormLabel>
                 <FormControl>
                   <Input placeholder="+591 71234567 " type="text" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
-          /><FormField
-          control={form.control}
-          name="direccion"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Dirección</FormLabel>
-              <FormControl>
-                <Input placeholder="Calle 123, Ciudad" type="text" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          />
+          <FormField
+            control={form.control}
+            name="cif"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Dirección</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Calle 123, Ciudad"
+                    type="text"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="profileImage"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Logo de la empresa</FormLabel>
+                <FormControl>
+                  {photo ? (<p className="text-sm">Imagen Cargada</p>) :(
+                  <UploadButton
+                  className="bg-slate-600 rounded-xl text-slate-50 pb-2"
+                    endpoint="profileImage"
+                    onClientUploadComplete={(res) => {
+                      // Do something with the response
+                      console.log("Files: ", res);
+                      setphoto(true);
+                      toast({
+                        description: "La imagen se ha subido correctamente.",
+                      })
+                    }}
+                    onUploadError={(error: Error) => {
+                      toast(
+                        {
+                          description: {error},
+                        }
+                      )
+                    }}
+                  />)}
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
         <Button type="submit">Submit</Button>
       </form>

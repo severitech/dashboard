@@ -4,6 +4,7 @@ import { Noto_Sans_Display } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider, SignedIn } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster"
 const notoSansDisplay = Noto_Sans_Display({
   variable: "--font-noto-sans-display",
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({
           >
             <SignedIn></SignedIn>
             {children}
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>

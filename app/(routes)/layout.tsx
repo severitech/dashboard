@@ -12,7 +12,7 @@ export default function LayoutDashboard({
       </section>
       <section className="w-full xl:ml-80">
         <NavBar />
-        <section className="p-6 bg-[#fafbfc] dark:bg-secondary">
+        <section className="p-6 bg-[#fafbfc] dark:bg-secondary"> 
           {children}
         </section>
       </section>

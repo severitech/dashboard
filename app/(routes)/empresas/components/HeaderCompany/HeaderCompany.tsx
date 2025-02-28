@@ -24,7 +24,7 @@ export function HeaderCompany() {
         <DialogContent className="sm:max-w-[625px]">
           <DialogHeader>
             <DialogTitle>Crear Empresa</DialogTitle>
-            <DialogDescription>Crear nueva empresa</DialogDescription>
+            <DialogDescription>Rellenar datos</DialogDescription>
           </DialogHeader>
           <FormCreateCustomer setOpenModalCreate={setOpenModalCreate} />
         </DialogContent>

@@ -1,9 +1,10 @@
 "use client";
-import axios from "axios";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import { z } from "zod";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { CompanyFormsProps } from "./CompanyForms.type";
 import {
   Form,
   FormControl,
@@ -11,10 +12,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import { FormCreateCustomerType } from "../FormCreateCustomer/FormCreateCustomer.type";
 import {
   Select,
   SelectContent,
@@ -22,60 +21,47 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Toast } from "@/components/ui/toast";
+import { Textarea } from "@/components/ui/textarea";
 import { UploadButton } from "@/utils/uploadthing";
-import { useToast } from "@/components/hooks/use-toast";
-const formSchema = z.object({
-  name: z.string().min(4).max(50),
-  country: z.string().min(4).max(50),
-  website: z.string().min(4).max(50),
-  phone: z.string().min(4).max(50),
-  cif: z.string().min(6),
-  profileImage: z.string().optional(),
-});
-import { useRouter } from "next/navigation";
-export function FormCreateCustomer(props: FormCreateCustomerType) {
-  const { setOpenModalCreate } = props;
-  const [photo, setphoto] = useState(false);
-  const route = useRouter();
-  // 1. Define your form.
+import { formSchema } from "./CompanyForms.Form";
+import { toast } from "@/components/hooks/use-toast";
+import axios from "axios";
+export function CompanyForms(props: CompanyFormsProps) {
+  const { empresa } = props;
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      country: "",
-      website: "",
-      phone: "",
-      cif: "",
-      profileImage: "fdsgdf",
+      name: empresa.name,
+      country: empresa.country,
+      website: empresa.website,
+      phone: empresa.phone,
+      cif: empresa.cif,
     },
   });
-  const { toast } = useToast();
-  const { isValid } = form.formState;
-
-  // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      axios.post("/api/company", values);
-      route.refresh();
-      toast({ title: "Empresa creada correctamente" });
-      setOpenModalCreate(false);
+      await axios.patch(`/api/company/${empresa.id}`, values)
+      toast({
+        title: "Empresa editada"
+      })
+      router.refresh()
+      
     } catch (error) {
       toast({
-        title: "Semething went wrong",
-        description: "Please try again",
-        variant: "destructive",
-      });
-      console.log(
-        "Submit error /app/(routes)/empresas/components/FormCreateCustomer/FormCreateCustomer.tsx",
-        error
-      );
+        title:"Error al editar",
+        variant: "destructive"
+      })
     }
   };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="grid grid-cols-2 gap-3">
-          <FormField
+        <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
@@ -159,42 +145,8 @@ export function FormCreateCustomer(props: FormCreateCustomerType) {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="profileImage"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Logo de la empresa</FormLabel>
-                <FormControl>
-                  {photo ? (
-                    <p className="text-sm">Imagen Cargada</p>
-                  ) : (
-                    <UploadButton
-                      className="bg-slate-600 rounded-xl text-slate-50 pb-2"
-                      endpoint="profileImage"
-                      {...field}
-                      onClientUploadComplete={(res) => {
-                        console.log("Files: ", res);
-                        setphoto(true);
-                        toast({
-                          description: "La imagen se ha subido correctamente.",
-                        });
-                      }}
-                      onUploadError={(error: Error) => {
-                        toast({
-                          description:
-                            error.message || "Error al subir la imagen",
-                        });
-                      }}
-                    />
-                  )}
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
         </div>
-        <Button type="submit">Guardar</Button>
+        <Button type="submit">Editar Empresa</Button>
       </form>
     </Form>
   );

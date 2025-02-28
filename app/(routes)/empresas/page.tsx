@@ -1,10 +1,10 @@
 import { HeaderCompany } from "./components/HeaderCompany";
-
+import { ListCompanies } from "./components/ListCompanies";
 export default function page() {
   return (
     <div>
       <HeaderCompany />
-      <p>List Company</p>
+      <ListCompanies/>
     </div>
   )
 }

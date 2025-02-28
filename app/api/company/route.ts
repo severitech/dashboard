@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
     try {
         const { userId } = await auth();
+        console.log(userId)
         const data = await req.json();
 
         if (!userId) {
